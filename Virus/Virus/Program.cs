@@ -51,30 +51,26 @@ namespace Virus
                         if (Pole[i, j] == 1)
                         {
                             Pole[i, j] = 2;
-                            try
-                            {
-                                if (Pole[i, j - 1] == 0)
-                                    Pole[i, j - 1] = 2;
-                            }
-                            catch (IndexOutOfRangeException) { }
-                            try
-                            {
-                                if (Pole[i, j + 1] == 0)
-                                    Pole[i, j + 1] = 2;
-                            }
-                            catch (IndexOutOfRangeException) { }
-                            try
+                            if (i - 1 > -1)
                             {
                                 if (Pole[i - 1, j] == 0)
                                     Pole[i - 1, j] = 2;
                             }
-                            catch (IndexOutOfRangeException) { }
-                            try
+                            if (j - 1 > -1)
+                            {
+                                if (Pole[i, j - 1] == 0)
+                                    Pole[i, j - 1] = 2;
+                            }
+                            if (i + 1 < n)
                             {
                                 if (Pole[i + 1, j] == 0)
                                     Pole[i + 1, j] = 2;
                             }
-                            catch (IndexOutOfRangeException) { }
+                            if (j + 1 < m)
+                            {
+                                if (Pole[i, j + 1] == 0)
+                                    Pole[i, j + 1] = 2;
+                            }
                         }
                     }
                 for (int i = 0; i < n; i++)
