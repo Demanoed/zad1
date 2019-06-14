@@ -10,12 +10,13 @@ namespace Virus
     class Program
     {
         private static int[,] Pole;
+        private static int n, m;
         private static void CreatePole()
         {
             ColorMess.Yellow("\n Введите колличество строк в поле: ");
-            int n = Input.Check(1, 3000);
+            n = Input.Check(1, 3000);
             ColorMess.Yellow("\n Введите колличество столбцов в поле: ");
-            int m = Input.Check(1, 3000);
+            m = Input.Check(1, 3000);
             Pole = new int[n, m];
             Console.Clear();
             ColorMess.Yellow("\n Введите количество зараженных клеток: ");
@@ -24,15 +25,72 @@ namespace Virus
             {
                 Console.Clear();
                 ColorMess.Yellow("\n Введите координату Х у " + (i + 1) + " точки: ");
-                int x = Input.Check(1, n);
+                int x = Input.Check(1, n)-1;
                 ColorMess.Yellow("\n Введите координату Y у " + (i + 1) + " точки: ");
-                int y = Input.Check(1, m);
+                int y = Input.Check(1, m)-1;
                 Pole[x,y] = 1;
             }
+        }
+        private static int Zarajenie()
+        {
+            int time = 0;
+            bool ok;
+            do
+            {
+                ok = true;
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (Pole[i, j] != 1)
+                            ok = false;
+                    }
+                if (ok) return time;
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (Pole[i, j] == 1)
+                        {
+                            Pole[i, j] = 2;
+                            try
+                            {
+                                if (Pole[i, j - 1] == 0)
+                                    Pole[i, j - 1] = 2;
+                            }
+                            catch (IndexOutOfRangeException) { }
+                            try
+                            {
+                                if (Pole[i, j + 1] == 0)
+                                    Pole[i, j + 1] = 2;
+                            }
+                            catch (IndexOutOfRangeException) { }
+                            try
+                            {
+                                if (Pole[i - 1, j] == 0)
+                                    Pole[i - 1, j] = 2;
+                            }
+                            catch (IndexOutOfRangeException) { }
+                            try
+                            {
+                                if (Pole[i + 1, j] == 0)
+                                    Pole[i + 1, j] = 2;
+                            }
+                            catch (IndexOutOfRangeException) { }
+                        }
+                    }
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < m; j++)
+                        if (Pole[i, j] == 2)
+                            Pole[i, j] = 1;
+                time++;
+            } while (!ok);
+            return -1;
         }
         static void Main()
         {
             CreatePole();
+            Console.Clear();
+            int time = Zarajenie();
+            ColorMess.Green("\n Вся область заразится через " + time + " секунд\n");
             Message.GoToBack();
         }
     }
