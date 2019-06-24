@@ -13,22 +13,21 @@ namespace Virus
         private static int n, m;
         private static void CreatePole()
         {
-            ColorMess.Yellow("\n Введите колличество строк в поле: ");
+            ColorMess.Yellow("\n Введите колличество строк: ");
             n = Input.Check(1, 3000);
-            ColorMess.Yellow("\n Введите колличество столбцов в поле: ");
+            ColorMess.Yellow("\n Введите колличество столбцов: ");
             m = Input.Check(1, 3000);
             Pole = new int[n, m];
-            Console.Clear();
-            ColorMess.Yellow("\n Введите количество зараженных клеток: ");
+            ColorMess.Yellow("\n Введите колличество проникших вирусов: ");
             int kol = Input.Check(1, 10);
-            for(int i = 0; i<kol; i++)
+            for (int i = 0; i < kol; i++)
             {
                 Console.Clear();
-                ColorMess.Yellow("\n Введите координату Х у " + (i + 1) + " точки: ");
-                int x = Input.Check(1, n)-1;
-                ColorMess.Yellow("\n Введите координату Y у " + (i + 1) + " точки: ");
-                int y = Input.Check(1, m)-1;
-                Pole[x,y] = 1;
+                ColorMess.Yellow("\n Введите координату " + (i + 1) + " точки Х: ");
+                int x = Input.Check(1, n);
+                ColorMess.Yellow("\n Введите координату " + (i + 1) + " точки Y: ");
+                int y = Input.Check(1, m);
+                Pole[x - 1, y - 1] = 1;
             }
         }
         private static int Zarajenie()
@@ -85,8 +84,7 @@ namespace Virus
         {
             CreatePole();
             Console.Clear();
-            int time = Zarajenie();
-            ColorMess.Green("\n Вся область заразится через " + time + " секунд\n");
+            ColorMess.Cyan("\n Поле заразится через " + Zarajenie() + " секунд");
             Message.GoToBack();
         }
     }
