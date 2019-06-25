@@ -9,8 +9,13 @@ namespace Virus
 {
     class Program
     {
+        #region Матрица по которой распространяется вирус
         private static int[,] Pole;
+        #endregion
+        #region Переменные для размеров матрицы
         private static int n, m;
+        #endregion
+        #region Создает поле
         private static void CreatePole()
         {
             ColorMess.Yellow("\n Введите колличество строк: ");
@@ -30,6 +35,8 @@ namespace Virus
                 Pole[x - 1, y - 1] = 1;
             }
         }
+        #endregion
+        #region Функция для заражения
         private static int Zarajenie()
         {
             int time = 0;
@@ -80,6 +87,8 @@ namespace Virus
             } while (!ok);
             return -1;
         }
+        #endregion
+        #region Запрашивает ввод кол-ва вирусов, строк и столбцов. Печатает результат.
         static void Main()
         {
             CreatePole();
@@ -87,5 +96,6 @@ namespace Virus
             ColorMess.Cyan("\n Поле заразится через " + Zarajenie() + " секунд");
             Message.GoToBack();
         }
+        #endregion
     }
 }
