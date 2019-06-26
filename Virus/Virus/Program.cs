@@ -89,7 +89,8 @@ namespace Virus
         {
             CreatePole();
             Console.Clear();
-            ColorMess.Cyan("\n Поле заразится через " + Zarajenie() + " секунд");
+            ColorMess.Magenta("\nСчитаем...");
+            ColorMess.Cyan("\n\n Поле заразится через " + Zarajenie() + " секунд");
             Message.GoToBack();
         }
         #endregion
